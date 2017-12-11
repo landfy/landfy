@@ -1,5 +1,5 @@
-# landfy
-NPM module for generate landing pages internationalized 
+# ![Landfy](https://raw.githubusercontent.com/landfy/design/master/logo.png)
+Creator of internationalized landing pages.
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
