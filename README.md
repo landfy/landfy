@@ -13,7 +13,7 @@ NPM module for generate landing pages internationalized
 [downloads-url]: https://npmjs.org/package/landfy
 [travis-image]: https://img.shields.io/travis/landfy/landfy/master.svg?label=linux
 [travis-url]: https://travis-ci.org/landfy/landfy
-[appveyor-image]: https://img.shields.io/appveyor/ci/landfy/landfy/master.svg?label=windows
-[appveyor-url]: https://ci.appveyor.com/project/landfy/landfy
+[appveyor-image]: https://img.shields.io/appveyor/ci/fabiorogeriosj/landfy/master.svg?label=windows
+[appveyor-url]: https://ci.appveyor.com/project/fabiorogeriosj/landfy
 [coveralls-image]: https://img.shields.io/coveralls/landfy/landfy/master.svg
 [coveralls-url]: https://coveralls.io/r/landfy/landfy?branch=master
