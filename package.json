@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "lint": "standard --fix",
-    "test": "npm run lint && NODE_ENV=test jest --coverage",
-    "test-windows": "npm run lint && set NODE_ENV=test&& jest --coverage"
+    "test": "npm run lint && jest --coverage"
   },
   "standard": {
     "globals": [
@@ -20,7 +19,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "minimist": "^1.2.0"
+    "commander": "^2.12.2"
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
