@@ -12,3 +12,5 @@ program
   .alias('i')
   .description('Install a lading page')
   .action(install)
+
+program.parse(process.argv)
