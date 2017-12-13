@@ -2,7 +2,7 @@
 
 const program = require('commander')
 
-const {install} = require('../lib/actions')
+const {install, build} = require('../lib/actions')
 
 program
   .version('0.1.0')
@@ -12,5 +12,11 @@ program
   .alias('i')
   .description('Install a lading page')
   .action(install)
+
+program
+  .command('build [destination]')
+  .alias('b')
+  .description('Build a lading page')
+  .action(build)
 
 program.parse(process.argv)
