@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
-var install = function install(templateName) {
-  console.log('install', templateName);
+var install = function install (templateName) {
+  console.log('install', templateName)
 
-  return 'install ' + templateName;
-};
+  return 'install ' + templateName
+}
 
-module.exports = install;
+module.exports = install
