@@ -1,7 +1,9 @@
-'use strict';
+'use strict'
 
-var install = require('./install');
+var install = require('./install')
+var build = require('./build')
 
 module.exports = {
-  install: install
-};
+  install: install,
+  build: build
+}
