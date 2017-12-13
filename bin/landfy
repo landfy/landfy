@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const program = require('commander')
+var program = require('commander')
 
-const {install} = require('../lib/actions')
+var actions = require('../dist/actions')
 
 program
   .version('0.1.0')
@@ -11,6 +11,6 @@ program
   .command('install <templateName>')
   .alias('i')
   .description('Install a lading page')
-  .action(install)
+  .action(actions.install)
 
 program.parse(process.argv)
