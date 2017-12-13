@@ -1,5 +1,5 @@
-const {build} = require('../../lib/actions')
+const actions = require('../../dist/actions')
 
 test('build action', () => {
-  expect(build('dist')).toBe('build dist')
+  expect(actions.build('dist')).toBe('build dist')
 })

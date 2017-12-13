@@ -4,7 +4,7 @@
   "scripts": {
     "build": "babel lib -d dist",
     "lint": "standard --fix",
-    "test": "npm run lint && jest --coverage",
+    "test": "npm run lint && npm run build && jest --coverage",
     "prepublish": "npm run build"
   },
   "standard": {

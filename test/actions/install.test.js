@@ -1,5 +1,5 @@
-const {install} = require('../../lib/actions')
+const actions = require('../../dist/actions')
 
 test('install action', () => {
-  expect(install('first')).toBe('install first')
+  expect(actions.install('first')).toBe('install first')
 })
