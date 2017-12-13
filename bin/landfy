@@ -13,4 +13,10 @@ program
   .description('Install a lading page')
   .action(actions.install)
 
+program
+  .command('build [destination]')
+  .alias('b')
+  .description('Build a lading page')
+  .action(actions.build)
+
 program.parse(process.argv)
