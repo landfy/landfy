@@ -8,6 +8,9 @@
     "prepublish": "npm run build"
   },
   "standard": {
+    "ignore": [
+      "/dist/"
+    ],
     "globals": [
       "beforeAll",
       "afterAll",
@@ -16,12 +19,16 @@
       "describe",
       "it",
       "test",
-      "expect"
+      "expect",
+      "jest"
     ]
   },
   "license": "MIT",
   "dependencies": {
-    "commander": "^2.12.2"
+    "commander": "^2.12.2",
+    "mime": "^1.6.0",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
