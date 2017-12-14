@@ -14,11 +14,11 @@ var build = function build(destination) {
 
   var dirs = fs.readdirSync(process.cwd());
 
-  if (!dirs.includes('languages')) {
+  if (!(dirs.indexOf('languages') !== -1)) {
     return logger.error('You need to be inside the folder of your project!\n\nFolder "languages" could not be found in this directory.');
   }
 
-  if (!dirs.includes('site')) {
+  if (!(dirs.indexOf('site') !== -1)) {
     return logger.error('You need to be inside the folder of your project!\n\nFolder "site" could not be found in this directory.');
   }
 
