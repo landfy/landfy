@@ -25,6 +25,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.17.1",
     "commander": "^2.12.2",
     "mime": "^1.6.0",
     "mkdirp": "^0.5.1",
