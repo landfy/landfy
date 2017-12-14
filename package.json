@@ -29,7 +29,8 @@
     "commander": "^2.12.2",
     "mime": "^1.6.0",
     "mkdirp": "^0.5.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "unzip": "^0.1.11"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
