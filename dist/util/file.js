@@ -7,19 +7,19 @@ var mime = require('mime');
 var _require = require('path'),
     dirname = _require.dirname;
 
-var getFiles = function getFiles(dir, files_) {
-  files_ = files_ || [];
+var getFiles = function getFiles(dir, files) {
+  files = files || [];
   var fileNames = fs.readdirSync(dir);
 
   fileNames.forEach(function (fileName) {
     var name = dir + '/' + fileName;
     if (fs.statSync(name).isDirectory()) {
-      getFiles(name, files_);
+      getFiles(name, files);
     } else {
-      files_.push(name);
+      files.push(name);
     }
   });
-  return files_;
+  return files;
 };
 
 var writeFileSync = function writeFileSync(path, contents) {

@@ -1,0 +1,4 @@
+{
+    "LANGUAGE_NOT_FOUND": "You need to be inside the folder of your project!\n\nFolder \"languages\" could not be found in this directory.",
+    "SITE_NOT_FOUND": "You need to be inside the folder of your project!\n\nFolder \"site\" could not be found in this directory."
+}
