@@ -4,18 +4,18 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"os"
-	
-	"install"
+
 	"build"
+	"install"
 	"server"
-	"util"  
+	"util"
 
 	"github.com/urfave/cli"
 )
 
 //Config json file
 type Config struct {
-	Version		string 	`json:"version"`
+	Version string `json:"version"`
 }
 
 func getConfig() Config {
@@ -31,31 +31,31 @@ func getConfig() Config {
 
 func main() {
 	config := getConfig()
-	
+
 	app := cli.NewApp()
 	app.Version = config.Version
 	app.Commands = []cli.Command{
 		{
-			Name: "install",
-			Aliases: []string{"i"},
-			Usage: "Install a new template",
+			Name:        "install",
+			Aliases:     []string{"i"},
+			Usage:       "Install a new template",
 			Description: "* is required!",
-			ArgsUsage: "*[template_name] [path_install]",
-			Action: install.Exec,
+			ArgsUsage:   "*[template_name] [path_install]",
+			Action:      install.Exec,
 		},
 		{
-			Name: "build",
-			Aliases: []string{"b"},
-			Usage: "Build your site",
+			Name:        "build",
+			Aliases:     []string{"b"},
+			Usage:       "Build your site",
 			Description: "* is required!",
-			ArgsUsage: "[destination]",
-			Action: build.Exec,
+			ArgsUsage:   "[destination]",
+			Action:      build.Exec,
 		},
 		{
-			Name: "server",
+			Name:    "server",
 			Aliases: []string{"s"},
-			Usage: "Run a local http server",
-			Action: server.Exec,
+			Usage:   "Run a local http server",
+			Action:  server.Exec,
 		},
 	}
 
