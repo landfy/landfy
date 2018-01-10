@@ -1,3 +1,6 @@
+src/languages
+src/site
+src/public
 # Logs
 logs
 *.log

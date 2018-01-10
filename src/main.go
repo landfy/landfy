@@ -33,6 +33,7 @@ func main() {
 	config := getConfig()
 
 	app := cli.NewApp()
+	app.Usage = "Generate landing pages internationalized"
 	app.Version = config.Version
 	app.Commands = []cli.Command{
 		{
