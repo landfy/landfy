@@ -11,8 +11,6 @@ import (
 
 	"github.com/fabiorogeriosj/landfy/util"
 
-	"github.com/fabiorogeriosj/landfy/label"
-
 	"github.com/Jeffail/gabs"
 	"github.com/urfave/cli"
 )
@@ -63,12 +61,12 @@ func checkDirs(cwd string) error {
 	siteDir := path.Join(cwd, "site")
 
 	if _, err := os.Stat(languagesDir); os.IsNotExist(err) {
-		util.ShowError(label.LanguageNotFound)
+		util.ShowError(util.LanguageNotFound)
 		os.Exit(0)
 	}
 
 	if _, err := os.Stat(siteDir); os.IsNotExist(err) {
-		util.ShowError(label.SiteNotFound)
+		util.ShowError(util.SiteNotFound)
 		os.Exit(0)
 	}
 
