@@ -5,10 +5,10 @@ import (
 	"io/ioutil"
 	"os"
 
-	"build"
-	"install"
-	"server"
-	"util"
+	"github.com/fabiorogeriosj/landfy/build"
+	"github.com/fabiorogeriosj/landfy/install"
+	"github.com/fabiorogeriosj/landfy/server"
+	"github.com/fabiorogeriosj/landfy/util"
 
 	"github.com/urfave/cli"
 )

@@ -1,6 +1,6 @@
-src/languages
-src/site
-src/public
+languages
+site
+public
 # Logs
 logs
 *.log

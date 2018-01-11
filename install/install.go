@@ -3,8 +3,8 @@ package install
 import (
 	"fmt"
 
-	"util"
-	
+	"github.com/fabiorogeriosj/landfy/util"
+
 	"github.com/urfave/cli"
 )
 
