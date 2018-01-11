@@ -7,6 +7,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/fabiorogeriosj/landfy/util"
@@ -18,10 +19,10 @@ import (
 //Exec command
 func Exec(c *cli.Context) error {
 	destination := c.Args().First()
-	cwd, _ := os.Getwd()
 	if destination == "" {
-		destination = path.Join(cwd, "public")
+		destination = "public"
 	}
+	cwd, _ := os.Getwd()
 
 	checkDirs(cwd)
 	checkDestination(destination)
@@ -30,21 +31,66 @@ func Exec(c *cli.Context) error {
 	for _, source := range sources {
 		for _, lang := range languageFiles {
 			content, _ := ioutil.ReadFile(source)
+			//Opter o config
+			newPath := getNewPath(languageFiles, "", lang, destination, source)
 			if isText(source) {
 				contentLang, _ := ioutil.ReadFile(lang)
 				languageJSON, _ := gabs.ParseJSON(contentLang)
 				languageParsed, _ := languageJSON.ChildrenMap()
+				contentString := string(content)
 				for key, prop := range languageParsed {
-					fmt.Println("key: " + key + " value: " + prop.Data().(string))
+					re := regexp.MustCompile("\\[" + key + "]")
+					contentString = re.ReplaceAllString(contentString, prop.Data().(string))
 				}
+				writeFile(newPath, contentString)
+			} else {
+				writeFile(newPath, string(content))
 			}
-
-			source += "" + string(content)
-
 		}
 	}
 
+	util.ShowSuccess(util.BuildOk)
 	return nil
+}
+
+func getNewPath(languageFiles []string, config string, lang string, destination string, source string) string {
+	cwd, _ := os.Getwd()
+	oldPath := filepath.Join(cwd, "site")
+	destination = filepath.Join(cwd, destination)
+	//fmt.Println("source: ", source, "old: ", oldPath, "new: ", destniation)
+	return strings.Replace(source, oldPath, destination, 1)
+}
+
+func writeFile(newPath string, content string) {
+	dir := filepath.Dir(newPath)
+	err := os.MkdirAll(dir, os.ModePerm)
+	if err != nil {
+		util.ShowError(util.NotCreatePathFile)
+		fmt.Println(err)
+		os.Exit(0)
+	}
+	file, err := os.Create(newPath)
+	if err != nil {
+		util.ShowError(util.NotCreateFile)
+		fmt.Println(err)
+		os.Exit(0)
+	}
+	file.Close()
+	fileW, err := os.OpenFile(newPath, os.O_RDWR, 0644)
+	if err != nil {
+		util.ShowError(util.NotOpenFile)
+		os.Exit(0)
+	}
+	_, err = fileW.WriteString(string(content))
+	if err != nil {
+		util.ShowError(util.NotWriteFile)
+		os.Exit(0)
+	}
+	err = fileW.Sync()
+	if err != nil {
+		util.ShowError(util.NotSyncFile)
+		os.Exit(0)
+	}
 }
 
 func isText(source string) bool {
@@ -74,6 +120,8 @@ func checkDirs(cwd string) error {
 }
 
 func checkDestination(destination string) error {
+	cwd, _ := os.Getwd()
+	destination = filepath.Join(cwd, destination)
 	if _, err := os.Stat(destination); err == nil {
 		os.RemoveAll(destination)
 	}
