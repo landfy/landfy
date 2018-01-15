@@ -11,9 +11,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/fabiorogeriosj/landfy/util"
-
 	"github.com/Jeffail/gabs"
+	"github.com/landfy/landfy/util"
 	"github.com/urfave/cli"
 )
 

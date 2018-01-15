@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/fabiorogeriosj/landfy/util"
+	"github.com/landfy/landfy/util"
 	"github.com/urfave/cli"
 )
 
