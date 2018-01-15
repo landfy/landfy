@@ -1,18 +1,10 @@
-language: node_js
-node_js:
-  - "4.8"
-  - "5.12"
-  - "6.10"
-  - "7.9"
-matrix:
-  include:
-    - node_js: "8.0"
-      env: "NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly"
-  allow_failures:
-    # Allow the nightly installs to fail
-    - env: "NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly"
-sudo: false
-cache:
-  directories:
-    - node_modules
-script: "npm run lint && set NODE_ENV=test&& jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+language: go
+go: 
+ - 1.3.3
+ - 1.4.2
+ - 1.5.1
+ - release
+ - tip
+
+script:
+ - go test -v ./...
