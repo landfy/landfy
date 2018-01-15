@@ -1,6 +1,7 @@
 languages
 site
 public
+build/public
 # Logs
 logs
 *.log
