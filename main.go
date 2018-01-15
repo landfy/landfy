@@ -1,40 +1,19 @@
 package main
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"os"
 
 	"github.com/fabiorogeriosj/landfy/build"
 	"github.com/fabiorogeriosj/landfy/install"
 	"github.com/fabiorogeriosj/landfy/server"
-	"github.com/fabiorogeriosj/landfy/util"
 
 	"github.com/urfave/cli"
 )
 
-//Config json file
-type Config struct {
-	Version string `json:"version"`
-}
-
-func getConfig() Config {
-	data, err := ioutil.ReadFile("./landfy.json")
-	if err != nil {
-		util.ShowError("landfy.json not found!")
-		os.Exit(0)
-	}
-	var config Config
-	json.Unmarshal(data, &config)
-	return config
-}
-
 func main() {
-	config := getConfig()
-
 	app := cli.NewApp()
 	app.Usage = "Generate landing pages internationalized"
-	app.Version = config.Version
+	app.Version = "1.0.0"
 	app.Commands = []cli.Command{
 		{
 			Name:        "install",
@@ -51,6 +30,13 @@ func main() {
 			Description: "* is required!",
 			ArgsUsage:   "[destination]",
 			Action:      build.Exec,
+			Flags: []cli.Flag{
+				cli.StringFlag{
+					Name:  "lang",
+					Value: "en",
+					Usage: "set a default language generate",
+				},
+			},
 		},
 		{
 			Name:    "server",

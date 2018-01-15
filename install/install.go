@@ -1,6 +1,7 @@
 package install
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/fabiorogeriosj/landfy/util"
@@ -12,9 +13,9 @@ import (
 func Exec(c *cli.Context) error {
 	template := c.Args().First()
 	if template == "" {
-		util.ShowError("You need infomed a name of template!")
-		return nil
+		util.ShowError(util.NameTemplateNotInformed)
+		return errors.New(util.NameTemplateNotInformed)
 	}
 	fmt.Println("Command install with args: ", c.Args())
-	return nil
+	return errors.New("NOT IMPLEMENTED")
 }

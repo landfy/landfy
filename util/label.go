@@ -26,3 +26,6 @@ const NotCreatePathFile string = "Could not create path of file on target!"
 
 //BuildOk const label
 const BuildOk string = "Build executed successfully!"
+
+//NameTemplateNotInformed const label
+const NameTemplateNotInformed string = "You need infomed a name of template!"

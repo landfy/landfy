@@ -1,6 +1,7 @@
 package build
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -18,21 +19,24 @@ import (
 
 //Exec command
 func Exec(c *cli.Context) error {
+	defaultLanguage := c.String("lang")
 	destination := c.Args().First()
 	if destination == "" {
 		destination = "public"
 	}
 	cwd, _ := os.Getwd()
 
-	checkDirs(cwd)
+	err := checkDirs(cwd)
+	if err != nil {
+		return err
+	}
 	checkDestination(destination)
 	sources := getFiles(path.Join(cwd, "site"))
 	languageFiles := getFiles(path.Join(cwd, "languages"))
 	for _, source := range sources {
 		for _, lang := range languageFiles {
 			content, _ := ioutil.ReadFile(source)
-			//Opter o config
-			newPath := getNewPath(languageFiles, "", lang, destination, source)
+			newPath := getNewPath(languageFiles, defaultLanguage, lang, destination, source)
 			if isText(source) {
 				contentLang, _ := ioutil.ReadFile(lang)
 				languageJSON, _ := gabs.ParseJSON(contentLang)
@@ -53,44 +57,51 @@ func Exec(c *cli.Context) error {
 	return nil
 }
 
-func getNewPath(languageFiles []string, config string, lang string, destination string, source string) string {
+func getNewPath(languageFiles []string, defaultLanguage string, lang string, destination string, source string) string {
 	cwd, _ := os.Getwd()
 	oldPath := filepath.Join(cwd, "site")
-	destination = filepath.Join(cwd, destination)
-	//fmt.Println("source: ", source, "old: ", oldPath, "new: ", destniation)
+	ext := filepath.Ext(filepath.Base(lang))
+	langFolder := filepath.Base(lang)[0 : len(filepath.Base(lang))-len(ext)]
+	if len(languageFiles) <= 1 || langFolder == defaultLanguage {
+		destination = filepath.Join(cwd, destination)
+	} else {
+		destination = filepath.Join(cwd, destination, langFolder)
+	}
 	return strings.Replace(source, oldPath, destination, 1)
 }
 
-func writeFile(newPath string, content string) {
+func writeFile(newPath string, content string) error {
 	dir := filepath.Dir(newPath)
 	err := os.MkdirAll(dir, os.ModePerm)
 	if err != nil {
 		util.ShowError(util.NotCreatePathFile)
 		fmt.Println(err)
-		os.Exit(0)
+		return errors.New(util.NotCreatePathFile)
 	}
 	file, err := os.Create(newPath)
 	if err != nil {
 		util.ShowError(util.NotCreateFile)
 		fmt.Println(err)
-		os.Exit(0)
+		return errors.New(util.NotCreateFile)
 	}
 	file.Close()
 	fileW, err := os.OpenFile(newPath, os.O_RDWR, 0644)
 	if err != nil {
 		util.ShowError(util.NotOpenFile)
-		os.Exit(0)
+		return errors.New(util.NotOpenFile)
 	}
 	_, err = fileW.WriteString(string(content))
 	if err != nil {
 		util.ShowError(util.NotWriteFile)
-		os.Exit(0)
+		return errors.New(util.NotWriteFile)
 	}
 	err = fileW.Sync()
 	if err != nil {
 		util.ShowError(util.NotSyncFile)
-		os.Exit(0)
+		return errors.New(util.NotSyncFile)
 	}
+
+	return nil
 }
 
 func isText(source string) bool {
@@ -108,12 +119,12 @@ func checkDirs(cwd string) error {
 
 	if _, err := os.Stat(languagesDir); os.IsNotExist(err) {
 		util.ShowError(util.LanguageNotFound)
-		os.Exit(0)
+		return errors.New(util.LanguageNotFound)
 	}
 
 	if _, err := os.Stat(siteDir); os.IsNotExist(err) {
 		util.ShowError(util.SiteNotFound)
-		os.Exit(0)
+		return errors.New(util.SiteNotFound)
 	}
 
 	return nil
