@@ -2,7 +2,7 @@
 
 var program = require('commander')
 
-var actions = require('../dist/actions')
+var actions = require('../lib/actions')
 
 program
   .version('0.1.0')
