@@ -3,9 +3,9 @@ package main
 import (
 	"os"
 
-	"github.com/fabiorogeriosj/landfy/build"
-	"github.com/fabiorogeriosj/landfy/install"
-	"github.com/fabiorogeriosj/landfy/server"
+	"github.com/landfy/landfy/build"
+	"github.com/landfy/landfy/install"
+	"github.com/landfy/landfy/server"
 
 	"github.com/urfave/cli"
 )

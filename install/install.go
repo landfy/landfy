@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/fabiorogeriosj/landfy/util"
+	"github.com/landfy/landfy/util"
 
 	"github.com/urfave/cli"
 )
